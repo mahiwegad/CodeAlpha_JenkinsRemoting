@@ -1,294 +1,277 @@
-\# Jenkins Remoting Project
+# Jenkins Remoting Project
 
+## Project Overview
 
+This project demonstrates the setup and implementation of Jenkins Remoting by connecting a remote Jenkins Agent with the Jenkins Controller.
 
-\## Project Overview
+The objective of this project was to understand distributed build execution in Jenkins, where workloads can be transferred from the controller to remote agents for efficient resource utilization and scalable CI/CD operations.
 
+Through this project, I gained practical experience in configuring Jenkins nodes, managing remote execution environments, and executing build tasks on a dedicated Jenkins Agent.
 
+---
 
-This project demonstrates the setup and implementation of Jenkins Remoting to connect a remote Jenkins agent with the Jenkins controller.
+## Project Objectives
 
+The following objectives were completed:
 
+* Configure a remote Jenkins Agent using Jenkins Remoting
+* Establish communication between Jenkins Controller and Agent
+* Execute build tasks on a remote machine
+* Verify distributed build execution
+* Understand Jenkins node management and isolation
+* Implement controlled remote command execution
 
-The main purpose of this project is to understand how Jenkins distributes build tasks across multiple machines, enabling efficient resource utilization, secure remote execution, and improved CI/CD workflow management.
+---
 
-
-
-\## Objectives
-
-
-
-The objectives completed in this project are:
-
-
-
-\- Configure a remote Jenkins node using Jenkins Remoting.
-
-\- Establish communication between Jenkins Controller and Jenkins Agent.
-
-\- Execute build tasks on a remote machine.
-
-\- Verify distributed build execution.
-
-\- Understand the concept of node isolation and secure build environments.
-
-
-
-\## Project Architecture
-
-
+## Project Architecture
 
 The project consists of two main components:
 
+```
+Jenkins Controller
+        |
+        |
+   Jenkins Remoting
+        |
+        |
+Jenkins Agent
+```
 
+---
 
-\### Jenkins Controller
+## Jenkins Controller
 
-
-
-The Jenkins Controller manages job scheduling, configuration, and communication with connected agents.
-
-
+The Jenkins Controller is responsible for managing the CI/CD workflow.
 
 Responsibilities:
 
+* Creating and managing Jenkins jobs
+* Scheduling build execution
+* Managing connected agents
+* Monitoring build results
+* Controlling pipeline execution
 
+---
 
-\- Create and manage Jenkins jobs.
-
-\- Assign workloads to available agents.
-
-\- Monitor build execution and results.
-
-
-
-\### Jenkins Agent
-
-
+## Jenkins Agent
 
 The Jenkins Agent is a remote machine connected to the Jenkins Controller using Jenkins Remoting.
 
-
-
 Responsibilities:
 
+* Executing assigned build tasks
+* Providing additional computing resources
+* Running builds in an isolated workspace
+* Reporting execution status back to Jenkins Controller
 
+---
 
-\- Execute assigned build tasks.
+## Environment Details
 
-\- Provide computing resources for builds.
-
-\- Maintain an isolated environment for job execution.
-
-
-
-\## Environment Details
-
-
-
-Jenkins Controller:
-
-
+### Jenkins Controller
 
 Operating System:
 
+```
 Windows 11
+```
 
-
-
-Jenkins Agent:
-
-
+### Jenkins Agent
 
 Node Name:
 
+```
 Agent1
-
-
+```
 
 Operating System:
 
+```
 Windows 11
-
-
+```
 
 Java Version:
 
+```
 OpenJDK 21
+```
 
+---
 
+## Implementation Steps
 
-\## Implementation Steps
+The following steps were performed:
 
+### 1. Created Jenkins Agent Node
 
+A new Jenkins node named `Agent1` was created and configured.
 
-The following steps were performed to complete the project:
+### 2. Configured Remote Agent
 
+The remote agent was configured with:
 
+* Dedicated workspace directory
+* Required Java environment
+* Jenkins Remoting connection settings
 
-1\. Created a new Jenkins node named Agent1.
+### 3. Connected Agent With Controller
 
+The Agent1 node was successfully connected to the Jenkins Controller using Jenkins Remoting.
 
+### 4. Verified Agent Availability
 
-2\. Configured the remote agent with a dedicated workspace directory.
+The Jenkins dashboard confirmed that the agent status changed to:
 
+```
+Online
+```
 
+### 5. Created Remote Execution Job
 
-3\. Connected the Agent1 node with the Jenkins Controller using Jenkins Remoting.
+A Jenkins freestyle project named:
 
+```
+Remote-Agent-Test
+```
 
+was created to verify remote execution.
 
-4\. Verified that the agent status changed to online.
+### 6. Restricted Job Execution
 
+The job was configured to execute only on:
 
+```
+Agent1
+```
 
-5\. Created a Jenkins freestyle project for testing remote execution.
+---
 
+## Remote Build Execution
 
+The Jenkins job executed commands on the remote agent to verify successful communication.
 
-6\. Restricted the project execution to the Agent1 node.
+Commands executed:
 
-
-
-7\. Executed commands remotely through the Jenkins build process.
-
-
-
-\## Remote Build Execution
-
-
-
-A Jenkins job named Remote-Agent-Test was created to verify remote execution.
-
-
-
-The following commands were executed on the remote agent:
-
-
-
-hostname
-
-
+### hostname
 
 Used to verify the machine where the build was executed.
 
+Example:
 
+```
+Maan
+```
 
-whoami
+---
 
-
+### whoami
 
 Used to verify the user account running the build.
 
+Example:
 
+```
+maan\maanw
+```
 
-java -version
+---
 
-
+### java -version
 
 Used to verify Java availability on the remote node.
 
+Example:
 
+```
+OpenJDK 21
+```
 
-The build was successfully executed on Agent1.
+---
 
+## Build Result
 
+The remote build was executed successfully.
 
-Build Status:
+Result:
 
-
-
+```
 Finished: SUCCESS
+```
 
+---
 
+## Jenkins Remoting Verification
 
-\## Jenkins Remoting Verification
+The successful execution confirmed:
 
+* Jenkins Controller successfully communicated with Agent1
+* Build tasks were transferred to the remote machine
+* Commands executed inside the Agent workspace
+* Distributed Jenkins execution was working correctly
 
+---
 
-The successful execution confirmed that:
+## Node Isolation and Security
 
+Using dedicated Jenkins Agents improves security and reliability by separating build environments.
 
+Practices implemented:
 
-\- Jenkins Controller was able to communicate with Agent1.
+* Dedicated execution environment for builds
+* Restricted jobs to specific nodes
+* Controlled remote execution through Jenkins authentication
+* Separation of Controller and Agent responsibilities
 
-\- Build workloads were successfully transferred to the remote node.
+---
 
-\- Commands were executed in the Agent1 workspace.
+## Project Screenshots
 
-\- Jenkins distributed execution was working correctly.
+The repository contains screenshots showing:
 
+### 1. Agent Online Status
 
+Shows that the Jenkins Agent successfully connected with the Controller.
 
-\## Node Isolation and Security
+### 2. Agent Configuration
 
+Shows the configuration details of the remote Jenkins node.
 
+### 3. Job Configuration
 
-Node isolation improves security and reliability by separating build environments.
+Shows the Jenkins job configured to run on Agent1.
 
+### 4. Console Output
 
+Shows successful remote command execution and build completion.
 
-The following practices were implemented:
+---
 
+## Learning Outcomes
 
+Through this project, I gained practical experience in:
 
-\- Builds were executed on a dedicated Jenkins Agent.
+* Jenkins node configuration
+* Jenkins Remoting architecture
+* Remote build execution
+* CI/CD infrastructure management
+* Agent and controller communication
+* Build environment isolation
+* Distributed workload execution
 
-\- Jobs were restricted to specific nodes.
+---
 
-\- Remote execution was controlled through Jenkins authentication.
+## Conclusion
 
-\- The Jenkins Controller and Agent responsibilities were separated.
+This project successfully demonstrated Jenkins Remoting and distributed build execution.
 
+By connecting a remote Jenkins Agent with the Jenkins Controller, build workloads were efficiently distributed while maintaining controlled execution environments.
 
+The project provided practical understanding of how Jenkins supports scalable CI/CD workflows using remote agents.
 
-\## Project Screenshots
+---
 
+## Author
 
+Mahi Wegad
 
-The screenshots folder contains proof of implementation:
-
-
-
-1\. Agent Online Status
-
-
-
-Shows that the Jenkins Agent was successfully connected.
-
-
-
-2\. Agent Configuration
-
-
-
-Shows the configuration details of the remote node.
-
-
-
-3\. Job Configuration
-
-
-
-Shows the Jenkins job restricted to Agent1.
-
-
-
-4\. Console Output
-
-
-
-Shows successful remote execution and build completion.
-
-
-
-\## Conclusion
-
-
-
-This project provided practical experience with Jenkins Remoting and distributed build execution.
-
-
-
-The successful connection of a remote Jenkins agent demonstrated how Jenkins can efficiently distribute workloads across multiple machines while maintaining controlled and secure execution environments.
-
+CodeAlpha DevOps Internship
